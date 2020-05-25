@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 615501dbe4f3fe94fbf4b564abb10237, type: 3}
+  m_Name: ModConfig
+  m_EditorClassIdentifier: 
+  id: brawlerDatabaseModule
+  title: Brawler Database
+  author: eXish
+  description: 'Help fix the database of Bakugan brawlers by filling in missing data
+    for a brawler.
+
+
+    Credits to everyone who helped out in the making of Bakugan Battle Brawlers for
+    all the photos, you all filled a huge part of my childhood so thank you so much
+    for making this animated series!
+
+
+    HTML: https://ktane.timwi.de/HTML/Brawler%20Database.html
+
+    PDF: https://ktane.timwi.de/PDF/Brawler%20Database.pdf
+
+
+    Brawler Database (brawlerDatabaseModule) v1.0.0
+
+    Module and Concept by eXish
+
+    Twitch Plays supported'
+  version: 1.0.0
+  outputFolder: build
+  previewImage: {fileID: 2800000, guid: 3053aaf613198b14295f160772162f97, type: 3}
