@@ -317,15 +317,17 @@ public class BrawlerDatabaseScript : MonoBehaviour {
 
     private IEnumerator glitchText()
     {
-        char[] valids = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-        string make = "";
-        for (int i = 0; i < 8; i++)
+        while (true)
         {
-            make += valids[UnityEngine.Random.Range(0, valids.Length)];
+            char[] valids = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+            string make = "";
+            for (int i = 0; i < 8; i++)
+            {
+                make += valids[UnityEngine.Random.Range(0, valids.Length)];
+            }
+            smallDisp.text = make;
+            yield return new WaitForSecondsRealtime(0.075f);
         }
-        smallDisp.text = make;
-        yield return new WaitForSecondsRealtime(0.05f);
-        glitch = StartCoroutine(glitchText());
     }
 
     private IEnumerator errorFlash(int num)
