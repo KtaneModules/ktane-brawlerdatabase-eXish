@@ -22,6 +22,7 @@ public class BrawlerDatabaseScript : MonoBehaviour {
     public GameObject[] errors;
     public GameObject[] buttonTexts;
 
+    private string[] glitches = new string[25];
     private string[] names = new string[] { "Ace", "Airzel", "Alice", "Anubias", "Barodius", "Baron", "Dan", "Fabia", "Gill", "Prince Hydron", "Jake", "Julie", "Kazarina", "Marucho", "Masquerade", "Mira", "Mylene", "Nurzak", "Ren", "Runo", "Sellon", "Shun", "Spectra", "Stoica", "Volt", "King Zenoheld" };
     private string[] homes = new string[] { "Earth", "Gundalia", "N/A", "Neathia", "Vestal" };
     private string[] attributes = new string[] { "Aquos", "Darkus", "Haos", "Pyrus", "Subterra", "Ventus" };
@@ -53,6 +54,16 @@ public class BrawlerDatabaseScript : MonoBehaviour {
     }
 
     void Start () {
+        for (int i = 0; i < 25; i++)
+        {
+            char[] valids = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+            string make = "";
+            for (int j = 0; j < 8; j++)
+            {
+                make += valids[UnityEngine.Random.Range(0, valids.Length)];
+            }
+            glitches[i] = make;
+        }
         chosenChar = UnityEngine.Random.Range(0, characterImgs.Length);
         characterDisp.sprite = characterImgs[chosenChar];
         Debug.LogFormat("[Brawler Database #{0}] The brawler displayed is {1}", moduleId, names[chosenChar]);
@@ -317,16 +328,14 @@ public class BrawlerDatabaseScript : MonoBehaviour {
 
     private IEnumerator glitchText()
     {
+        int ct = 0;
         while (true)
         {
-            char[] valids = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-            string make = "";
-            for (int i = 0; i < 8; i++)
-            {
-                make += valids[UnityEngine.Random.Range(0, valids.Length)];
-            }
-            smallDisp.text = make;
-            yield return new WaitForSecondsRealtime(0.075f);
+            smallDisp.text = glitches[ct];
+            ct++;
+            if (ct > (glitches.Length-1))
+                ct = 0;
+            yield return new WaitForSecondsRealtime(0.06f);
         }
     }
 
