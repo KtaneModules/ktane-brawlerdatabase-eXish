@@ -322,21 +322,18 @@ public class BrawlerDatabaseScript : MonoBehaviour {
     private IEnumerator fail()
     {
         audio.PlaySoundAtTransform("error", transform);
-        yield return new WaitForSecondsRealtime(0.8f);
+        yield return new WaitForSeconds(0.8f);
         audio.PlaySoundAtTransform("failure", transform);
     }
 
     private IEnumerator glitchText()
     {
-        int ct = 0;
-        while (true)
+        for (int i = 0; i < 25; i++)
         {
-            smallDisp.text = glitches[ct];
-            ct++;
-            if (ct > (glitches.Length-1))
-                ct = 0;
-            yield return new WaitForSecondsRealtime(0.06f);
+            smallDisp.text = glitches[i];
+            yield return new WaitForSeconds(0.06f);
         }
+        glitch = StartCoroutine(glitchText());
     }
 
     private IEnumerator errorFlash(int num)
