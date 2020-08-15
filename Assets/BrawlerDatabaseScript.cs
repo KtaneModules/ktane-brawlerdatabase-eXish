@@ -327,7 +327,8 @@ public class BrawlerDatabaseScript : MonoBehaviour {
                 make += valids[UnityEngine.Random.Range(0, valids.Length)];
             }
             smallDisp.text = make;
-            yield return null;
+            for (float f = 0.1f; f > 0f; f -= 0.02f)
+                yield return null;
         }
     }
 
