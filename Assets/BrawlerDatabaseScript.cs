@@ -16,6 +16,7 @@ public class BrawlerDatabaseScript : MonoBehaviour {
     public Sprite[] characterImgs;
     public Image characterDisp;
     public Text smallDisp;
+    public TextMesh smallDispGlitch;
     public Material[] buttonMats;
     public Renderer[] buttonBorders;
     public Renderer[] buttonInners;
@@ -189,6 +190,7 @@ public class BrawlerDatabaseScript : MonoBehaviour {
                 if (glitchOn)
                 {
                     StopCoroutine(glitch);
+                    smallDispGlitch.text = "";
                     glitchOn = false;
                 }
                 switch (Array.IndexOf(buttons, pressed) - 1)
@@ -272,6 +274,7 @@ public class BrawlerDatabaseScript : MonoBehaviour {
                     }
                     Debug.LogFormat("[Brawler Database #{0}] Manual recovery of data values failed! These data values are now incorrect: The brawler's {1}. Strike!", moduleId, log);
                     glitch = StartCoroutine(glitchText());
+                    smallDisp.text = "";
                     glitchOn = true;
                     for (int i = 0; i < 4; i++)
                     {
@@ -317,16 +320,16 @@ public class BrawlerDatabaseScript : MonoBehaviour {
 
     private IEnumerator glitchText()
     {
-        char[] valids = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+        char[] valids = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
         string make = "";
         while (true)
         {
             make = "";
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < 6; j++)
             {
                 make += valids[UnityEngine.Random.Range(0, valids.Length)];
             }
-            smallDisp.text = make;
+            smallDispGlitch.text = make;
             for (float f = 0.1f; f > 0f; f -= 0.02f)
                 yield return null;
         }
@@ -393,7 +396,7 @@ public class BrawlerDatabaseScript : MonoBehaviour {
                 string[] valids = new string[] { "name", "home", "attribute", "faction" };
                 if (!valids.Contains(parameters[1].ToLower()))
                 {
-                    yield return "sendtochaterror The specified data type '" + parameters[1] + "' is invalid!";
+                    yield return "sendtochaterror!f The specified data type '" + parameters[1] + "' is invalid!";
                     yield break;
                 }
                 string temp = "";
@@ -404,10 +407,10 @@ public class BrawlerDatabaseScript : MonoBehaviour {
                 temp = temp.Trim();
                 switch (Array.IndexOf(valids, parameters[1].ToLower()))
                 {
-                    case 0: if (inDataArray(temp, 0) == -1) { yield return "sendtochaterror The specified input '" + temp + "' is not an option for the name data type!"; yield break; } break;
-                    case 1: if (inDataArray(temp, 1) == -1) { yield return "sendtochaterror The specified input '" + temp + "' is not an option for the home data type!"; yield break; } break;
-                    case 2: if (inDataArray(temp, 2) == -1) { yield return "sendtochaterror The specified input '" + temp + "' is not an option for the attribute data type!"; yield break; } break;
-                    case 3: if (inDataArray(temp, 3) == -1) { yield return "sendtochaterror The specified input '" + temp + "' is not an option for the faction data type!"; yield break; } break;
+                    case 0: if (inDataArray(temp, 0) == -1) { yield return "sendtochaterror!f The specified input '" + temp + "' is not an option for the name data type!"; yield break; } break;
+                    case 1: if (inDataArray(temp, 1) == -1) { yield return "sendtochaterror!f The specified input '" + temp + "' is not an option for the home data type!"; yield break; } break;
+                    case 2: if (inDataArray(temp, 2) == -1) { yield return "sendtochaterror!f The specified input '" + temp + "' is not an option for the attribute data type!"; yield break; } break;
+                    case 3: if (inDataArray(temp, 3) == -1) { yield return "sendtochaterror!f The specified input '" + temp + "' is not an option for the faction data type!"; yield break; } break;
                 }
                 if (Array.IndexOf(valids, parameters[1].ToLower()) != selectedButton)
                 {
@@ -425,15 +428,15 @@ public class BrawlerDatabaseScript : MonoBehaviour {
                 string[] valids = new string[] { "name", "home", "attribute", "faction" };
                 if (!valids.Contains(parameters[1].ToLower()))
                 {
-                    yield return "sendtochaterror The specified data type '" + parameters[1] + "' is invalid!";
+                    yield return "sendtochaterror!f The specified data type '" + parameters[1] + "' is invalid!";
                     yield break;
                 }
                 switch (Array.IndexOf(valids, parameters[1].ToLower()))
                 {
-                    case 0: if (inDataArray(parameters[2], 0) == -1) { yield return "sendtochaterror The specified input '" + parameters[2] + "' is not an option for the name data type!"; yield break; } break;
-                    case 1: if (inDataArray(parameters[2], 1) == -1) { yield return "sendtochaterror The specified input '" + parameters[2] + "' is not an option for the home data type!"; yield break; } break;
-                    case 2: if (inDataArray(parameters[2], 2) == -1) { yield return "sendtochaterror The specified input '" + parameters[2] + "' is not an option for the attribute data type!"; yield break; } break;
-                    case 3: if (inDataArray(parameters[2], 3) == -1) { yield return "sendtochaterror The specified input '" + parameters[2] + "' is not an option for the faction data type!"; yield break; } break;
+                    case 0: if (inDataArray(parameters[2], 0) == -1) { yield return "sendtochaterror!f The specified input '" + parameters[2] + "' is not an option for the name data type!"; yield break; } break;
+                    case 1: if (inDataArray(parameters[2], 1) == -1) { yield return "sendtochaterror!f The specified input '" + parameters[2] + "' is not an option for the home data type!"; yield break; } break;
+                    case 2: if (inDataArray(parameters[2], 2) == -1) { yield return "sendtochaterror!f The specified input '" + parameters[2] + "' is not an option for the attribute data type!"; yield break; } break;
+                    case 3: if (inDataArray(parameters[2], 3) == -1) { yield return "sendtochaterror!f The specified input '" + parameters[2] + "' is not an option for the faction data type!"; yield break; } break;
                 }
                 if (Array.IndexOf(valids, parameters[1].ToLower()) != selectedButton)
                 {
@@ -450,9 +453,9 @@ public class BrawlerDatabaseScript : MonoBehaviour {
             {
                 string[] valids = new string[] { "name", "home", "attribute", "faction" };
                 if (valids.Contains(parameters[1].ToLower()))
-                    yield return "sendtochaterror The specified data type '"+parameters[1]+"' is valid but please specify something to set this data type to!";
+                    yield return "sendtochaterror The specified data type '" + parameters[1] + "' is valid but please specify something to set this data type to!";
                 else
-                    yield return "sendtochaterror The specified data type '" + parameters[1] + "' is invalid!";
+                    yield return "sendtochaterror!f The specified data type '" + parameters[1] + "' is invalid!";
             }
             else if (parameters.Length == 1)
             {
@@ -463,6 +466,7 @@ public class BrawlerDatabaseScript : MonoBehaviour {
 
     IEnumerator TwitchHandleForcedSolve()
     {
+        while (!activated) { yield return true; }
         for (int i = 0; i < 4; i++)
         {
             if (selectedSmallDisp[i] != correctValues[i])
