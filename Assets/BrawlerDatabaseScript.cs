@@ -330,7 +330,7 @@ public class BrawlerDatabaseScript : MonoBehaviour {
                 make += valids[UnityEngine.Random.Range(0, valids.Length)];
             }
             smallDispGlitch.text = make;
-            yield return new WaitForSeconds(.025f);
+            yield return new WaitForSeconds(.04f);
         }
     }
 
