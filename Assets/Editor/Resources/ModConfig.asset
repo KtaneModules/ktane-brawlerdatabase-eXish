@@ -28,11 +28,11 @@ MonoBehaviour:
     PDF: https://ktane.timwi.de/PDF/Brawler%20Database.pdf
 
 
-    Brawler Database (brawlerDatabaseModule) v1.0.6
+    Brawler Database (brawlerDatabaseModule) v1.0.7
 
     Module and Concept by eXish
 
     Twitch Plays supported'
-  version: 1.0.6
+  version: 1.0.7
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 3053aaf613198b14295f160772162f97, type: 3}

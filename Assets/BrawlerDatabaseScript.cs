@@ -321,7 +321,7 @@ public class BrawlerDatabaseScript : MonoBehaviour {
     private IEnumerator glitchText()
     {
         char[] valids = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-        string make = "";
+        string make;
         while (true)
         {
             make = "";
@@ -330,8 +330,7 @@ public class BrawlerDatabaseScript : MonoBehaviour {
                 make += valids[UnityEngine.Random.Range(0, valids.Length)];
             }
             smallDispGlitch.text = make;
-            for (float f = 0.1f; f > 0f; f -= 0.02f)
-                yield return null;
+            yield return new WaitForSeconds(.025f);
         }
     }
 
