@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using KModkit;
 using System.Text.RegularExpressions;
 using System;
 using UnityEngine.UI;
@@ -10,13 +9,11 @@ using UnityEngine.UI;
 public class BrawlerDatabaseScript : MonoBehaviour {
 
     public KMAudio audio;
-    public KMBombInfo bomb;
-
     public KMSelectable[] buttons;
     public Sprite[] characterImgs;
     public Image characterDisp;
     public Text smallDisp;
-    public TextMesh smallDispGlitch;
+    public TextMesh[] smallDispGlitches;
     public Material[] buttonMats;
     public Renderer[] buttonBorders;
     public Renderer[] buttonInners;
@@ -190,7 +187,11 @@ public class BrawlerDatabaseScript : MonoBehaviour {
                 if (glitchOn)
                 {
                     StopCoroutine(glitch);
-                    smallDispGlitch.text = "";
+                    for (int i = 0; i < smallDispGlitches.Length; i++)
+                    {
+                        smallDispGlitches[i].text = "";
+                        smallDispGlitches[i].gameObject.SetActive(false);
+                    }
                     glitchOn = false;
                 }
                 switch (Array.IndexOf(buttons, pressed) - 1)
@@ -221,6 +222,11 @@ public class BrawlerDatabaseScript : MonoBehaviour {
                 if (glitchOn)
                 {
                     StopCoroutine(glitch);
+                    for (int i = 0; i < smallDispGlitches.Length; i++)
+                    {
+                        smallDispGlitches[i].text = "";
+                        smallDispGlitches[i].gameObject.SetActive(false);
+                    }
                     glitchOn = false;
                 }
                 for (int i = 0; i < 4; i++)
@@ -321,16 +327,24 @@ public class BrawlerDatabaseScript : MonoBehaviour {
     private IEnumerator glitchText()
     {
         char[] valids = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-        string make;
-        while (true)
+        for (int i = 0; i < smallDispGlitches.Length; i++)
         {
-            make = "";
+            string make = "";
             for (int j = 0; j < 6; j++)
             {
                 make += valids[UnityEngine.Random.Range(0, valids.Length)];
             }
-            smallDispGlitch.text = make;
+            smallDispGlitches[i].text = make;
+        }
+        int index = 0;
+        while (true)
+        {
+            smallDispGlitches[index].gameObject.SetActive(true);
             yield return new WaitForSeconds(.04f);
+            smallDispGlitches[index].gameObject.SetActive(false);
+            index++; 
+            if (index == smallDispGlitches.Length)
+                index = 0;
         }
     }
 
